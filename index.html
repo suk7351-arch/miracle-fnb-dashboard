@@ -11,23 +11,29 @@
     h1{margin:0 0 10px;font-size:22px;line-height:1.35;letter-spacing:0;color:#111827}
     p{margin:0 0 18px;color:#536276;font-size:14px;line-height:1.65}
     button{height:42px;padding:0 16px;border:0;border-radius:10px;background:#111827;color:#fff;font-weight:700;cursor:pointer}
-    .row{display:flex;gap:10px;margin-top:18px}
+    .row{display:flex;gap:10px;margin-top:12px}
     input{flex:1;height:42px;padding:0 12px;border:1px solid #d6dfec;border-radius:10px;font-size:14px}
     .error{color:#b91c1c;font-weight:700}
+    .hidden{display:none}
   </style>
 </head>
 <body>
   <div class="box" id="gate">
     <h1>Miracle F&amp;B Dashboard</h1>
-    <p id="message">Shared links open automatically. If the link was shortened or truncated, paste the access key.</p>
-    <div class="row">
+    <p id="message">비밀번호를 입력하면 대시보드가 열립니다.</p>
+    <div class="row" id="passwordRow">
+      <input id="accessPassword" type="password" placeholder="비밀번호" autocomplete="current-password">
+      <button id="passwordBtn" type="button">확인</button>
+    </div>
+    <div class="row hidden" id="keyRow">
       <input id="manualKey" type="password" placeholder="Access key">
       <button id="openBtn" type="button">Open</button>
     </div>
   </div>
   <script>
-    const iv = "zJzWbShLKjHgo5x-";
+    const iv = "TyrFwHD9dGQ8QI3c";
     const payloadUrl = "payload.txt";
+    const requiredPassword = "12345";
 
     function fromBase64url(value) {
       const text = String(value || "").replace(/-/g, "+").replace(/_/g, "/");
@@ -64,12 +70,35 @@
       }
     }
 
+    function unlock() {
+      const password = document.getElementById("accessPassword").value;
+      const message = document.getElementById("message");
+      if (requiredPassword && password !== requiredPassword) {
+        message.innerHTML = '<span class="error">비밀번호가 올바르지 않습니다.</span>';
+        document.getElementById("accessPassword").select();
+        return;
+      }
+      const key = keyFromLocation();
+      if (key) {
+        openDashboard(key);
+        return;
+      }
+      message.textContent = "공유 링크가 잘렸다면 Access key를 입력하세요.";
+      document.getElementById("passwordRow").classList.add("hidden");
+      document.getElementById("keyRow").classList.remove("hidden");
+      document.getElementById("manualKey").focus();
+    }
+
     document.getElementById("openBtn").onclick = () => {
       const key = document.getElementById("manualKey").value.trim();
       if (key) location.hash = "k=" + encodeURIComponent(key);
       openDashboard(key);
     };
-    openDashboard(keyFromLocation());
+    document.getElementById("passwordBtn").onclick = unlock;
+    document.getElementById("accessPassword").addEventListener("keydown", (event) => {
+      if (event.key === "Enter") unlock();
+    });
+    document.getElementById("accessPassword").focus();
   </script>
 </body>
 </html>
