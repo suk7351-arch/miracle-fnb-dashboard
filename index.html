@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <title>Miracle F&amp;B Dashboard</title>
   <style>
     :root{color-scheme:light;font-family:Pretendard,'Noto Sans KR',Inter,system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI','Malgun Gothic',Arial,sans-serif;background:#f4f7fb;color:#111827}
@@ -31,8 +34,8 @@
     </div>
   </div>
   <script>
-    const iv = "OLn8lA3Sxyfk3Jls";
-    const payloadUrl = "payload.txt";
+    const iv = "rmueiC_1e4D4lysk";
+    const payloadUrl = "payload.txt?v=f5f52e27ffda";
     const requiredPassword = "12345";
 
     function fromBase64url(value) {
@@ -53,7 +56,7 @@
       const message = document.getElementById("message");
       try {
         if (!keyText) throw new Error("Missing access key.");
-        message.textContent = "Opening dashboard.";
+        message.textContent = "대시보드를 여는 중입니다.";
         const rawKey = fromBase64url(keyText);
         const cryptoKey = await crypto.subtle.importKey("raw", rawKey, "AES-GCM", false, ["decrypt"]);
         const payload = await fetch(payloadUrl, { cache: "no-store" }).then(async (res) => {
@@ -66,7 +69,11 @@
         document.write(html);
         document.close();
       } catch (error) {
-        message.innerHTML = '<span class="error">Dashboard access failed.</span><br>' + String(error.message || error);
+        const freshUrl = location.origin + location.pathname + "?v=" + Date.now() + location.hash;
+        const reason = error && error.name === "OperationError"
+          ? "브라우저 캐시로 이전 잠금 페이지와 최신 데이터가 섞였습니다."
+          : String(error.message || error);
+        message.innerHTML = '<span class="error">대시보드 접근에 실패했습니다.</span><br>' + reason + '<br><a href="' + freshUrl + '">캐시를 새로고침해서 다시 열기</a>';
       }
     }
 
