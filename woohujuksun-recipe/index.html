@@ -6,18 +6,29 @@
   <title>우후죽순 레시피</title>
   <style>
     :root {
-      --bg: #f5f7f2;
-      --surface: #fff;
-      --ink: #1f2a21;
-      --muted: #667266;
-      --line: #dde5da;
-      --brand: #2d6a4f;
-      --brand-dark: #173b2d;
-      --accent: #d77a25;
-      --soft: #e7f0e8;
-      --pending: #f7efe5;
-      --warning: #b33228;
-      --shadow: 0 14px 34px rgba(30, 48, 35, .10);
+      --bg: #f7f5ef;
+      --surface: #fffefa;
+      --surface-soft: #faf8f1;
+      --ink: #17231d;
+      --muted: #70776e;
+      --line: #e5e1d7;
+      --line-strong: #d8d2c4;
+      --brand: #365a45;
+      --brand-dark: #14231c;
+      --sidebar: #17251f;
+      --sidebar-2: #20362a;
+      --accent: #a97843;
+      --soft: #edf3ec;
+      --pending: #f6efe4;
+      --warning: #ad4a3b;
+      --radius: 18px;
+      --radius-sm: 12px;
+      --shadow: 0 18px 42px rgba(41, 50, 40, .10);
+      --shadow-card: 0 10px 28px rgba(49, 60, 47, .075);
+      --shadow-hover: 0 18px 38px rgba(49, 60, 47, .14);
+      --cat: #6f8f76;
+      --cat-soft: #edf3ec;
+      --cat-ink: #365a45;
     }
 
     * { box-sizing: border-box; }
@@ -29,10 +40,14 @@
 
     body {
       margin: 0;
-      background: var(--bg);
+      background:
+        linear-gradient(180deg, rgba(255, 254, 250, .78), rgba(247, 245, 239, 0) 340px),
+        var(--bg);
       color: var(--ink);
       font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
       letter-spacing: 0;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
     }
 
     button { font: inherit; color: inherit; }
@@ -47,86 +62,108 @@
       position: sticky;
       top: 0;
       height: 100vh;
-      padding: 28px 18px;
-      background: var(--brand-dark);
+      padding: 30px 18px 22px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, 0) 220px),
+        linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
       color: #f4fbf5;
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 26px;
+      border-right: 1px solid rgba(255, 255, 255, .08);
+      box-shadow: 10px 0 30px rgba(24, 37, 30, .08);
     }
 
     .brand {
       display: grid;
-      gap: 7px;
-      padding: 0 8px 8px;
+      gap: 10px;
+      padding: 0 10px 12px;
     }
 
     .brand strong {
-      font-size: 24px;
+      font-size: 25px;
       line-height: 1.15;
-      font-weight: 800;
+      font-weight: 850;
+      letter-spacing: 0;
     }
 
     .brand span {
-      color: #bdd5c5;
+      color: rgba(228, 239, 231, .72);
       font-size: 13px;
       line-height: 1.45;
     }
 
     .nav {
       display: grid;
-      gap: 7px;
+      gap: 6px;
       overflow: auto;
-      padding-right: 4px;
+      padding-right: 5px;
     }
 
     .nav button {
       width: 100%;
-      border: 0;
-      border-radius: 8px;
-      padding: 12px 13px;
+      border: 1px solid transparent;
+      border-radius: 13px;
+      padding: 11px 12px;
       text-align: left;
       background: transparent;
-      color: #dcece1;
+      color: rgba(237, 246, 239, .78);
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
+      font-size: 14px;
+      font-weight: 720;
+      transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
     }
 
-    .nav button:hover,
-    .nav button.active {
-      background: rgba(255, 255, 255, .12);
+    .nav button:hover {
+      background: rgba(255, 255, 255, .075);
       color: #fff;
+      border-color: rgba(255, 255, 255, .08);
+    }
+
+    .nav button.active {
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--cat) 32%, transparent), rgba(255, 255, 255, .08));
+      color: #fff;
+      border-color: color-mix(in srgb, var(--cat) 42%, rgba(255, 255, 255, .10));
+      box-shadow: inset 3px 0 0 var(--cat), 0 10px 20px rgba(0, 0, 0, .10);
     }
 
     .nav small {
-      min-width: 28px;
-      height: 24px;
+      min-width: 25px;
+      height: 21px;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, .14);
-      color: #eef8f0;
-      font-size: 12px;
-      font-weight: 800;
+      background: rgba(255, 255, 255, .105);
+      color: rgba(245, 250, 246, .86);
+      font-size: 11px;
+      font-weight: 760;
+      letter-spacing: 0;
+    }
+
+    .nav button.active small {
+      background: color-mix(in srgb, var(--cat) 28%, #fff);
+      color: #10221a;
     }
 
     .side-note {
       margin-top: auto;
       border-top: 1px solid rgba(255, 255, 255, .16);
-      padding: 18px 8px 0;
-      color: #c6dbce;
-      font-size: 13px;
+      padding: 18px 10px 0;
+      color: rgba(224, 238, 229, .66);
+      font-size: 12.5px;
       line-height: 1.55;
     }
 
     main {
-      padding: 30px;
+      padding: 34px;
       display: grid;
-      gap: 22px;
+      gap: 24px;
     }
 
     .topbar {
@@ -134,21 +171,22 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 24px;
-      padding-bottom: 4px;
+      padding: 2px 0 4px;
     }
 
     .title h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: clamp(28px, 2.3vw, 36px);
       line-height: 1.2;
       color: var(--brand-dark);
+      font-weight: 850;
     }
 
     .title p {
-      margin: 9px 0 0;
+      margin: 10px 0 0;
       color: var(--muted);
       font-size: 15px;
-      line-height: 1.5;
+      line-height: 1.6;
     }
 
     .doc-meta {
@@ -176,33 +214,62 @@
     .summary {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 12px;
+      gap: 14px;
     }
 
     .metric {
       border: 1px solid var(--line);
       background: var(--surface);
-      border-radius: 8px;
-      padding: 16px;
-      min-height: 86px;
+      border-radius: var(--radius);
+      padding: 18px 18px 17px;
+      min-height: 98px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(45, 55, 43, .055);
+    }
+
+    .metric::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: var(--cat);
+      opacity: .72;
+    }
+
+    .metric:nth-child(1) { --cat: #557b60; }
+    .metric:nth-child(2) { --cat: #7a8f5a; }
+    .metric:nth-child(3) { --cat: #b7844f; }
+    .metric:nth-child(4) { --cat: #6e8796; }
+
+    .metric::after {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 1px;
+      background: linear-gradient(90deg, color-mix(in srgb, var(--cat) 28%, transparent), transparent);
     }
 
     .metric span {
       color: var(--muted);
-      font-size: 13px;
+      font-size: 12.5px;
+      font-weight: 720;
+      letter-spacing: 0;
     }
 
     .metric strong {
       display: block;
-      margin-top: 8px;
-      font-size: 26px;
-      color: var(--brand);
+      margin-top: 10px;
+      font-size: 31px;
+      line-height: 1;
+      color: var(--brand-dark);
+      font-weight: 850;
     }
 
     .category-section {
       scroll-margin-top: 24px;
       display: grid;
-      gap: 14px;
+      gap: 16px;
       align-content: start;
       min-height: calc(100vh - 238px);
     }
@@ -212,49 +279,80 @@
       align-items: end;
       justify-content: space-between;
       gap: 18px;
-      padding-top: 8px;
+      padding: 10px 2px 0;
     }
 
     .section-head h2 {
       margin: 0;
-      font-size: 22px;
+      font-size: 24px;
       line-height: 1.25;
       color: var(--brand-dark);
+      font-weight: 850;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-head h2::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--cat);
+      box-shadow: 0 0 0 5px var(--cat-soft);
     }
 
     .section-head p {
-      margin: 4px 0 0;
+      margin: 6px 0 0;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13.5px;
     }
 
     .cards {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      gap: 16px;
       align-items: start;
     }
 
     .card {
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: var(--radius);
       background: var(--surface);
       min-height: 0;
-      box-shadow: 0 8px 24px rgba(30, 48, 35, .06);
+      box-shadow: var(--shadow-card);
       overflow: hidden;
       display: grid;
       grid-template-rows: 215px auto;
+      position: relative;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cat), color-mix(in srgb, var(--cat) 28%, transparent));
+      opacity: .88;
+      z-index: 1;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--cat) 35%, var(--line));
+      box-shadow: var(--shadow-hover);
     }
 
     .photo {
       background:
-        linear-gradient(135deg, rgba(45, 106, 79, .12), rgba(215, 122, 37, .14)),
-        repeating-linear-gradient(45deg, #eef3ec 0, #eef3ec 10px, #e4ece2 10px, #e4ece2 20px);
+        linear-gradient(135deg, color-mix(in srgb, var(--cat) 16%, transparent), rgba(255, 255, 255, .08)),
+        repeating-linear-gradient(45deg, #f2f1ea 0, #f2f1ea 10px, #ebe9df 10px, #ebe9df 20px);
       border-bottom: 1px solid var(--line);
       display: grid;
       place-items: center;
-      color: #57705e;
-      font-weight: 800;
+      color: var(--cat-ink);
+      font-weight: 760;
       font-size: 13px;
       overflow: hidden;
     }
@@ -268,69 +366,99 @@
     }
 
     .card-body {
-      padding: 13px 14px 14px;
+      padding: 15px 15px 16px;
       display: grid;
       grid-template-rows: auto auto 40px;
-      gap: 8px;
+      gap: 10px;
       min-height: 0;
+      background: linear-gradient(180deg, #fffefa, #fffdf8);
     }
 
     .card h3 {
       margin: 0;
       min-height: 31px;
       max-height: 58px;
-      font-size: 22px;
-      line-height: 1.3;
+      font-size: 22.5px;
+      line-height: 1.24;
       color: var(--brand-dark);
       word-break: keep-all;
       overflow: hidden;
+      font-weight: 850;
     }
 
     .badge-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 6px;
+      gap: 7px;
+      align-items: center;
     }
 
     .badge {
       border-radius: 999px;
-      background: var(--soft);
-      color: var(--brand);
-      padding: 4px 8px;
-      font-size: 12px;
-      font-weight: 800;
+      border: 1px solid transparent;
+      background: #f1f1ec;
+      color: #5c665d;
+      padding: 5px 9px;
+      font-size: 11.5px;
+      line-height: 1;
+      font-weight: 780;
+      white-space: nowrap;
+    }
+
+    .badge.category-badge {
+      background: var(--cat-soft);
+      border-color: color-mix(in srgb, var(--cat) 20%, transparent);
+      color: var(--cat-ink);
+    }
+
+    .badge.status-badge {
+      background: #eef2ed;
+      color: #405348;
+      border-color: #dfe7dd;
+    }
+
+    .badge.video-badge {
+      background: #eef3f6;
+      color: #465f6b;
+      border-color: #dce8ee;
     }
 
     .badge.pending {
       background: var(--pending);
       color: #9a5a18;
+      border-color: #eadbc5;
     }
 
     .open-detail {
       align-self: end;
       width: 100%;
       height: 40px;
-      border: 1px solid #c7d6c9;
-      border-radius: 8px;
-      background: #f7faf5;
-      color: var(--brand-dark);
-      font-weight: 800;
+      border: 1px solid color-mix(in srgb, var(--cat) 28%, var(--line));
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fffefa, color-mix(in srgb, var(--cat-soft) 62%, #fff));
+      color: var(--cat-ink);
+      font-weight: 820;
       cursor: pointer;
       line-height: 1;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .72);
+      transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
     }
 
     .open-detail:hover {
-      border-color: var(--brand);
-      background: #eef6ef;
+      border-color: var(--cat);
+      background: var(--cat);
+      color: #fff;
+      transform: translateY(-1px);
     }
 
     .drawer-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(16, 27, 20, .38);
+      background: rgba(18, 28, 22, .42);
+      backdrop-filter: blur(3px);
       display: none;
       z-index: 20;
     }
@@ -344,7 +472,7 @@
       width: min(720px, 100vw);
       height: 100vh;
       background: var(--surface);
-      box-shadow: var(--shadow);
+      box-shadow: -22px 0 55px rgba(25, 34, 28, .18);
       transform: translateX(102%);
       transition: transform .2s ease;
       z-index: 21;
@@ -355,8 +483,9 @@
     .drawer.open { transform: translateX(0); }
 
     .drawer-head {
-      padding: 22px 24px;
+      padding: 24px 26px;
       border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #fffefa, #faf8f1);
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -365,8 +494,9 @@
 
     .drawer-head h2 {
       margin: 0;
-      font-size: 25px;
+      font-size: 26px;
       color: var(--brand-dark);
+      font-weight: 850;
     }
 
     .drawer-head span {
@@ -378,45 +508,48 @@
 
     .close {
       border: 1px solid var(--line);
-      background: #fff;
-      border-radius: 8px;
+      background: #fffefa;
+      border-radius: 12px;
       width: 40px;
       height: 40px;
       cursor: pointer;
       font-size: 24px;
       line-height: 1;
+      box-shadow: 0 5px 14px rgba(45, 55, 43, .07);
     }
 
     .drawer-body {
       overflow: auto;
-      padding: 24px;
+      padding: 24px 26px 28px;
       display: grid;
-      gap: 18px;
+      gap: 16px;
       align-content: start;
+      background: #f7f5ef;
     }
 
     .hero-photo {
       height: 300px;
-      border: 1px dashed #b8c8ba;
-      border-radius: 8px;
-      background: linear-gradient(135deg, rgba(45, 106, 79, .10), rgba(215, 122, 37, .12)), #f2f6ef;
+      border: 1px dashed #c9d2c4;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, rgba(89, 120, 93, .10), rgba(169, 120, 67, .10)), #f4f2eb;
       display: grid;
       place-items: center;
       color: #66806b;
-      font-weight: 800;
+      font-weight: 760;
       overflow: hidden;
     }
 
     .hero-photo img {
       object-fit: contain;
-      background: #f2f6ef;
+      background: #f4f2eb;
     }
 
     .recipe-video {
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: var(--radius);
       background: #101812;
       overflow: hidden;
+      box-shadow: var(--shadow-card);
     }
 
     .recipe-video video {
@@ -434,22 +567,24 @@
 
     .panel {
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 16px;
-      background: #fbfcfa;
+      border-radius: var(--radius-sm);
+      padding: 17px 18px;
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(45, 55, 43, .05);
     }
 
     .panel h3 {
       margin: 0 0 12px;
       color: var(--brand-dark);
       font-size: 16px;
+      font-weight: 840;
     }
 
     .panel p,
     .panel li {
       color: #405047;
       font-size: 14px;
-      line-height: 1.55;
+      line-height: 1.62;
     }
 
     .panel p { margin: 0; }
@@ -459,7 +594,7 @@
       border-collapse: collapse;
       overflow: hidden;
       border: 1px solid var(--line);
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       background: #fff;
     }
 
@@ -473,9 +608,9 @@
     }
 
     .ingredient-table th {
-      background: #edf4ee;
+      background: #f1f4ed;
       color: var(--brand-dark);
-      font-weight: 800;
+      font-weight: 820;
     }
 
     .ingredient-table tr:last-child td { border-bottom: 0; }
@@ -2570,6 +2705,25 @@
     };
 
     const slug = (text) => text.replaceAll("/", "-").replaceAll("&", "and").replaceAll("+", "plus").replaceAll(" ", "-");
+    const categoryPalettes = {
+      "탕/찜": ["#6b8d71", "#eef4ed", "#355a3f"],
+      "볶음/무침": ["#b7794b", "#fbf0e7", "#7d4b2d"],
+      "연어": ["#ca7968", "#fbebe8", "#8b4b42"],
+      "사이드": ["#7d8c68", "#f0f3ea", "#4e5f3f"],
+      "튀김": ["#c49a4a", "#fbf4e5", "#816126"],
+      "전": ["#9c8b4f", "#f4f0df", "#675c2e"],
+      "꼬치": ["#9f6b54", "#f7ede8", "#684537"],
+      "간단식사": ["#6f8f9b", "#edf3f5", "#415e69"],
+      "기본안주": ["#78946f", "#eef4ea", "#465f3d"],
+      "과일안주": ["#c28a61", "#fbf0e8", "#80573d"],
+      "디저트": ["#a989b5", "#f4edf6", "#654d70"],
+      "막걸리": ["#9aa35f", "#f2f4e5", "#5d6532"],
+      "하이볼": ["#7d96ae", "#edf3f8", "#475f77"]
+    };
+    const categoryStyle = (categoryName) => {
+      const [cat, soft, ink] = categoryPalettes[categoryName] || ["#6f8f76", "#edf3ec", "#365a45"];
+      return `--cat:${cat};--cat-soft:${soft};--cat-ink:${ink};`;
+    };
     const menuImages = {
       "일본식오뎅탕": "assets/tang-jjim/메인1_일본식오뎅탕.jpg",
       "우삼겹국물떡볶이": "assets/tang-jjim/메인1_우삼겹국물떡볶이.jpg",
@@ -2685,7 +2839,7 @@
 
     const categoryNav = document.getElementById("categoryNav");
     categoryNav.innerHTML = categories.map((category, index) => `
-      <button class="${index === 0 ? "active" : ""}" data-category="${category.name}">
+      <button class="${index === 0 ? "active" : ""}" style="${categoryStyle(category.name)}" data-category="${category.name}">
         ${category.name}<small>${category.menus.length}</small>
       </button>
     `).join("");
@@ -2694,7 +2848,7 @@
     const renderCategory = (categoryName) => {
       const category = categories.find((item) => item.name === categoryName) || categories[0];
       categorySections.innerHTML = `
-      <section class="category-section" id="${slug(category.name)}">
+      <section class="category-section" id="${slug(category.name)}" style="${categoryStyle(category.name)}">
         <div class="section-head">
           <div>
             <h2>${category.name}</h2>
@@ -2705,14 +2859,14 @@
           ${category.menus.map((menu) => {
             const detail = recipeDetails[menu] || highballDetails[menu];
             return `
-              <article class="card">
+              <article class="card" style="${categoryStyle(category.name)}">
                 <div class="photo">${renderPhoto(menu)}</div>
                 <div class="card-body">
                   <h3>${menu}</h3>
                   <div class="badge-row">
-                    <span class="badge">${category.name}</span>
-                    <span class="badge ${detail ? "" : "pending"}">${detail ? "레시피 등록" : "등록 예정"}</span>
-                    ${menuVideos[menu] ? `<span class="badge">영상 있음</span>` : ""}
+                    <span class="badge category-badge">${category.name}</span>
+                    <span class="badge status-badge ${detail ? "" : "pending"}">${detail ? "레시피 등록" : "등록 예정"}</span>
+                    ${menuVideos[menu] ? `<span class="badge video-badge">영상 있음</span>` : ""}
                   </div>
                   <button class="open-detail" data-menu="${menu}" data-category="${category.name}">레시피 보기</button>
                 </div>
