@@ -13,12 +13,12 @@
       --muted: #7a837b;
       --line: #e3e7df;
       --line-strong: #d4dbd0;
-      --brand: #08784a;
+      --brand: #0b5f3e;
       --brand-dark: #0f2419;
       --sidebar: #f9faf7;
       --sidebar-2: #ffffff;
-      --accent: #08784a;
-      --soft: #e8f3ee;
+      --accent: #0b5f3e;
+      --soft: #e7efe9;
       --pending: #f6efe4;
       --warning: #ad4a3b;
       --radius: 18px;
@@ -26,9 +26,9 @@
       --shadow: 0 24px 70px rgba(29, 38, 32, .12);
       --shadow-card: 0 8px 24px rgba(27, 38, 31, .055);
       --shadow-hover: 0 18px 38px rgba(27, 38, 31, .12);
-      --cat: #08784a;
-      --cat-soft: #e8f3ee;
-      --cat-ink: #0f5134;
+      --cat: #0b5f3e;
+      --cat-soft: #e7efe9;
+      --cat-ink: #16402e;
     }
 
     * { box-sizing: border-box; }
@@ -156,12 +156,12 @@
     }
 
     .nav button:hover {
-      background: #f4f6f3;
+      background: #f1f4ef;
       color: #18251e;
     }
 
     .nav button.active {
-      background: #f0f7f2;
+      background: #edf3ee;
       color: #10231a;
       font-weight: 760;
     }
@@ -196,7 +196,7 @@
       padding: 16px;
       color: #6d766e;
       background:
-        radial-gradient(circle at 88% 10%, rgba(12, 122, 77, .12), transparent 72px),
+        radial-gradient(circle at 88% 10%, rgba(11, 95, 62, .12), transparent 72px),
         #ffffff;
       font-size: 12.5px;
       line-height: 1.55;
@@ -219,8 +219,8 @@
     }
 
     .top-logo {
-      width: 84px;
-      height: 48px;
+      width: 101px;
+      height: 58px;
       object-fit: contain;
       flex: 0 0 auto;
       opacity: .94;
@@ -334,14 +334,14 @@
     .metric:nth-child(1),
     .metric:nth-child(2),
     .metric:nth-child(3),
-    .metric:nth-child(4) { --cat: #08784a; }
+    .metric:nth-child(4) { --cat: #0b5f3e; }
 
     .metric:first-child {
       background:
         radial-gradient(circle at 82% 18%, rgba(255, 255, 255, .18), transparent 70px),
-        linear-gradient(135deg, #08784a, #096b42);
+        linear-gradient(135deg, #0b5f3e, #084a31);
       border-color: transparent;
-      box-shadow: 0 16px 34px rgba(8, 120, 74, .20);
+      box-shadow: 0 16px 34px rgba(11, 95, 62, .22);
     }
 
     .metric:first-child::before,
@@ -467,7 +467,7 @@
     .photo {
       background:
         radial-gradient(circle at 50% 8%, rgba(255, 255, 255, .78), transparent 58%),
-        linear-gradient(180deg, #f0f7ef, #e5f0df);
+        linear-gradient(180deg, #edf4ec, #dfeade);
       border-bottom: 1px solid var(--line);
       display: grid;
       place-items: center;
@@ -513,12 +513,13 @@
       content: "";
       position: absolute;
       left: 0;
-      top: .22em;
-      bottom: .16em;
+      top: 50%;
+      height: 1.06em;
       width: 4px;
       border-radius: 999px;
       background: var(--cat);
       opacity: .84;
+      transform: translateY(-50%);
     }
 
     .badge-row {
@@ -622,7 +623,7 @@
       padding: 28px 28px 24px;
       border-bottom: 1px solid rgba(218, 225, 216, .86);
       background:
-        radial-gradient(circle at 92% 0%, rgba(8, 120, 74, .08), transparent 150px),
+        radial-gradient(circle at 92% 0%, rgba(11, 95, 62, .08), transparent 150px),
         rgba(255, 255, 255, .94);
       display: flex;
       justify-content: space-between;
@@ -910,8 +911,8 @@
         width: 100%;
       }
       .top-logo {
-        width: 62px;
-        height: 38px;
+        width: 74px;
+        height: 46px;
       }
       .doc-meta { min-width: 0; }
       .card { grid-template-rows: 205px auto; }
@@ -2913,10 +2914,10 @@
 
     const slug = (text) => text.replaceAll("/", "-").replaceAll("&", "and").replaceAll("+", "plus").replaceAll(" ", "-");
     const categoryPalettes = Object.fromEntries(
-      categories.map(({ name }) => [name, ["#08784a", "#e8f3ee", "#0f5134"]])
+      categories.map(({ name }) => [name, ["#0b5f3e", "#e7efe9", "#16402e"]])
     );
     const categoryStyle = (categoryName) => {
-      const [cat, soft, ink] = categoryPalettes[categoryName] || ["#08784a", "#e8f3ee", "#0f5134"];
+      const [cat, soft, ink] = categoryPalettes[categoryName] || ["#0b5f3e", "#e7efe9", "#16402e"];
       return `--cat:${cat};--cat-soft:${soft};--cat-ink:${ink};`;
     };
     const menuImages = {
