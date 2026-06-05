@@ -13,12 +13,12 @@
       --muted: #7a837b;
       --line: #e3e7df;
       --line-strong: #d4dbd0;
-      --brand: #0c7a4d;
-      --brand-dark: #111d17;
+      --brand: #08784a;
+      --brand-dark: #0f2419;
       --sidebar: #f9faf7;
       --sidebar-2: #ffffff;
-      --accent: #a97843;
-      --soft: #edf3ec;
+      --accent: #08784a;
+      --soft: #e8f3ee;
       --pending: #f6efe4;
       --warning: #ad4a3b;
       --radius: 18px;
@@ -26,9 +26,9 @@
       --shadow: 0 24px 70px rgba(29, 38, 32, .12);
       --shadow-card: 0 8px 24px rgba(27, 38, 31, .055);
       --shadow-hover: 0 18px 38px rgba(27, 38, 31, .12);
-      --cat: #6f8f76;
-      --cat-soft: #edf3ec;
-      --cat-ink: #365a45;
+      --cat: #08784a;
+      --cat-soft: #e8f3ee;
+      --cat-ink: #0f5134;
     }
 
     * { box-sizing: border-box; }
@@ -100,8 +100,8 @@
       border-radius: 13px;
       background:
         radial-gradient(circle at 50% 48%, #ffffff 0 28%, transparent 29%),
-        linear-gradient(135deg, #0c7a4d, #65aa79);
-      box-shadow: 0 10px 22px rgba(12, 122, 77, .20);
+        linear-gradient(135deg, #08784a, #2f9666);
+      box-shadow: 0 10px 22px rgba(8, 120, 74, .20);
     }
 
     .brand strong {
@@ -292,17 +292,17 @@
       opacity: .72;
     }
 
-    .metric:nth-child(1) { --cat: #557b60; }
-    .metric:nth-child(2) { --cat: #7a8f5a; }
-    .metric:nth-child(3) { --cat: #b7844f; }
-    .metric:nth-child(4) { --cat: #6e8796; }
+    .metric:nth-child(1),
+    .metric:nth-child(2),
+    .metric:nth-child(3),
+    .metric:nth-child(4) { --cat: #08784a; }
 
     .metric:first-child {
       background:
         radial-gradient(circle at 82% 18%, rgba(255, 255, 255, .18), transparent 70px),
-        linear-gradient(135deg, #0b6f47, #0a8b56);
+        linear-gradient(135deg, #08784a, #096b42);
       border-color: transparent;
-      box-shadow: 0 16px 34px rgba(12, 122, 77, .20);
+      box-shadow: 0 16px 34px rgba(8, 120, 74, .20);
     }
 
     .metric:first-child::before,
@@ -2836,7 +2836,7 @@
       "하이볼": ["#7d96ae", "#edf3f8", "#475f77"]
     };
     const categoryStyle = (categoryName) => {
-      const [cat, soft, ink] = categoryPalettes[categoryName] || ["#6f8f76", "#edf3ec", "#365a45"];
+      const [cat, soft, ink] = ["#08784a", "#e8f3ee", "#0f5134"];
       return `--cat:${cat};--cat-soft:${soft};--cat-ink:${ink};`;
     };
     const menuImages = {
