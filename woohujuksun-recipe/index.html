@@ -2820,23 +2820,11 @@
     };
 
     const slug = (text) => text.replaceAll("/", "-").replaceAll("&", "and").replaceAll("+", "plus").replaceAll(" ", "-");
-    const categoryPalettes = {
-      "탕/찜": ["#6b8d71", "#eef4ed", "#355a3f"],
-      "볶음/무침": ["#b7794b", "#fbf0e7", "#7d4b2d"],
-      "연어": ["#ca7968", "#fbebe8", "#8b4b42"],
-      "사이드": ["#7d8c68", "#f0f3ea", "#4e5f3f"],
-      "튀김": ["#c49a4a", "#fbf4e5", "#816126"],
-      "전": ["#9c8b4f", "#f4f0df", "#675c2e"],
-      "꼬치": ["#9f6b54", "#f7ede8", "#684537"],
-      "간단식사": ["#6f8f9b", "#edf3f5", "#415e69"],
-      "기본안주": ["#78946f", "#eef4ea", "#465f3d"],
-      "과일안주": ["#c28a61", "#fbf0e8", "#80573d"],
-      "디저트": ["#a989b5", "#f4edf6", "#654d70"],
-      "막걸리": ["#9aa35f", "#f2f4e5", "#5d6532"],
-      "하이볼": ["#7d96ae", "#edf3f8", "#475f77"]
-    };
+    const categoryPalettes = Object.fromEntries(
+      categories.map(({ name }) => [name, ["#08784a", "#e8f3ee", "#0f5134"]])
+    );
     const categoryStyle = (categoryName) => {
-      const [cat, soft, ink] = ["#08784a", "#e8f3ee", "#0f5134"];
+      const [cat, soft, ink] = categoryPalettes[categoryName] || ["#08784a", "#e8f3ee", "#0f5134"];
       return `--cat:${cat};--cat-soft:${soft};--cat-ink:${ink};`;
     };
     const menuImages = {
