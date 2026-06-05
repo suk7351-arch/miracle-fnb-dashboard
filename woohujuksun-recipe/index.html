@@ -86,30 +86,17 @@
 
     .brand {
       display: grid;
-      grid-template-columns: 36px minmax(0, 1fr);
-      gap: 4px 10px;
+      gap: 5px;
       align-items: center;
-      padding: 0 8px 8px;
-    }
-
-    .brand::before {
-      content: "";
-      grid-row: 1 / 3;
-      width: 34px;
-      height: 34px;
-      border-radius: 13px;
-      background:
-        radial-gradient(circle at 50% 48%, #ffffff 0 28%, transparent 29%),
-        linear-gradient(135deg, #08784a, #2f9666);
-      box-shadow: 0 10px 22px rgba(8, 120, 74, .20);
+      padding: 2px 8px 10px;
     }
 
     .brand strong {
-      font-size: 17px;
+      font-size: 22px;
       line-height: 1.18;
       font-weight: 860;
       letter-spacing: 0;
-      color: #14231c;
+      color: var(--brand);
       white-space: nowrap;
     }
 
@@ -229,6 +216,14 @@
       align-items: center;
       gap: 16px;
       padding: 0 2px 2px;
+    }
+
+    .top-logo {
+      width: 84px;
+      height: 48px;
+      object-fit: contain;
+      flex: 0 0 auto;
+      opacity: .94;
     }
 
     .search-filter {
@@ -837,24 +832,13 @@
       }
       .brand {
         display: grid;
-        grid-template-columns: 34px minmax(0, 1fr);
-        grid-template-areas:
-          "mark title"
-          "mark desc";
+        grid-template-columns: minmax(0, 1fr);
         align-items: center;
-        column-gap: 10px;
         row-gap: 1px;
         padding: 0 2px;
       }
-      .brand::before {
-        grid-area: mark;
-        width: 30px;
-        height: 30px;
-        border-radius: 10px;
-      }
       .brand strong {
-        grid-area: title;
-        font-size: 17px;
+        font-size: 20px;
         line-height: 1.15;
         white-space: nowrap;
       }
@@ -918,8 +902,16 @@
       .section-head {
         display: grid;
       }
+      .topbar {
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+      }
       .search-filter {
         width: 100%;
+      }
+      .top-logo {
+        width: 62px;
+        height: 38px;
       }
       .doc-meta { min-width: 0; }
       .card { grid-template-rows: 205px auto; }
@@ -951,6 +943,7 @@
           <input id="menuSearch" type="search" placeholder="메뉴 검색" autocomplete="off">
           <kbd>Ctrl F</kbd>
         </label>
+        <img class="top-logo" src="assets/brand/woohujuksun-logo.png" alt="우후죽순 로고">
       </header>
 
       <section class="summary" aria-label="요약">
