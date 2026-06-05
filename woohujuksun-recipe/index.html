@@ -110,6 +110,7 @@
       font-weight: 860;
       letter-spacing: 0;
       color: #14231c;
+      white-space: nowrap;
     }
 
     .brand span {
@@ -231,7 +232,7 @@
     }
 
     .search-filter {
-      width: min(440px, 100%);
+      width: min(660px, 100%);
       height: 46px;
       display: flex;
       align-items: center;
@@ -596,8 +597,8 @@
     .drawer-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(18, 28, 22, .42);
-      backdrop-filter: blur(3px);
+      background: rgba(18, 28, 22, .30);
+      backdrop-filter: blur(5px);
       display: none;
       z-index: 20;
     }
@@ -610,10 +611,11 @@
       right: 0;
       width: min(720px, 100vw);
       height: 100vh;
-      background: var(--surface);
-      box-shadow: -22px 0 55px rgba(25, 34, 28, .18);
+      background: #f6f7f3;
+      border-left: 1px solid rgba(218, 225, 216, .92);
+      box-shadow: -24px 0 60px rgba(25, 34, 28, .14);
       transform: translateX(102%);
-      transition: transform .2s ease;
+      transition: transform .22s ease;
       z-index: 21;
       display: grid;
       grid-template-rows: auto 1fr;
@@ -622,9 +624,11 @@
     .drawer.open { transform: translateX(0); }
 
     .drawer-head {
-      padding: 24px 26px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #fffefa, #faf8f1);
+      padding: 28px 28px 24px;
+      border-bottom: 1px solid rgba(218, 225, 216, .86);
+      background:
+        radial-gradient(circle at 92% 0%, rgba(8, 120, 74, .08), transparent 150px),
+        rgba(255, 255, 255, .94);
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
@@ -633,37 +637,51 @@
 
     .drawer-head h2 {
       margin: 0;
-      font-size: 26px;
+      font-size: 27px;
+      line-height: 1.24;
       color: var(--brand-dark);
       font-weight: 850;
+      letter-spacing: 0;
     }
 
     .drawer-head span {
       display: inline-block;
       margin-top: 8px;
-      color: var(--muted);
-      font-size: 14px;
+      color: #7a8279;
+      font-size: 13px;
+      font-weight: 620;
     }
 
     .close {
-      border: 1px solid var(--line);
-      background: #fffefa;
-      border-radius: 12px;
-      width: 40px;
-      height: 40px;
+      border: 1px solid #e3e9df;
+      background: #ffffff;
+      color: #607063;
+      border-radius: 14px;
+      width: 42px;
+      height: 42px;
       cursor: pointer;
-      font-size: 24px;
+      font-size: 23px;
       line-height: 1;
-      box-shadow: 0 5px 14px rgba(45, 55, 43, .07);
+      box-shadow: 0 10px 24px rgba(45, 55, 43, .06);
+      transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+    }
+
+    .close:hover {
+      background: var(--brand);
+      border-color: var(--brand);
+      color: #ffffff;
+      transform: translateY(-1px);
     }
 
     .drawer-body {
       overflow: auto;
-      padding: 24px 26px 28px;
+      padding: 22px 28px 30px;
       display: grid;
-      gap: 16px;
+      gap: 14px;
       align-content: start;
-      background: #f7f5ef;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, .42), transparent 180px),
+        #f6f7f3;
     }
 
     .hero-photo {
@@ -684,18 +702,18 @@
     }
 
     .recipe-video {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #101812;
+      border: 1px solid #e2e8df;
+      border-radius: 18px;
+      background: #0f1f17;
       overflow: hidden;
-      box-shadow: var(--shadow-card);
+      box-shadow: 0 16px 36px rgba(31, 43, 35, .10);
     }
 
     .recipe-video video {
       width: 100%;
       max-height: 360px;
       display: block;
-      background: #101812;
+      background: #0f1f17;
     }
 
     .detail-grid {
@@ -705,49 +723,61 @@
     }
 
     .panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 17px 18px;
-      background: var(--surface);
-      box-shadow: 0 8px 24px rgba(45, 55, 43, .05);
+      border: 1px solid rgba(218, 225, 216, .9);
+      border-radius: 18px;
+      padding: 18px 18px 19px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 12px 30px rgba(45, 55, 43, .055);
     }
 
     .panel h3 {
-      margin: 0 0 12px;
+      margin: 0 0 13px;
       color: var(--brand-dark);
       font-size: 16px;
       font-weight: 840;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel h3::before {
+      content: "";
+      width: 6px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--brand);
     }
 
     .panel p,
     .panel li {
       color: #405047;
       font-size: 14px;
-      line-height: 1.62;
+      line-height: 1.68;
     }
 
     .panel p { margin: 0; }
 
     .ingredient-table {
       width: 100%;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       overflow: hidden;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
+      border: 1px solid #e1e7de;
+      border-radius: 14px;
       background: #fff;
     }
 
     .ingredient-table th,
     .ingredient-table td {
       padding: 12px 14px;
-      border-bottom: 1px solid var(--line);
+      border-bottom: 1px solid #e8ede5;
       color: #405047;
       font-size: 14px;
       text-align: left;
     }
 
     .ingredient-table th {
-      background: #f1f4ed;
+      background: #f4f7f1;
       color: var(--brand-dark);
       font-weight: 820;
     }
@@ -903,10 +933,10 @@
   <div class="shell">
     <aside class="sidebar">
       <div class="brand">
-        <strong>우후죽순 <br>레시피 보드</strong>
-        <span>가맹점 운영용 메뉴 레시피 대시보드</span>
+        <strong>우후죽순 레시피</strong>
+        <span>가맹점 운영용 레시피 대시보드</span>
       </div>
-      <div class="nav-label">MENU</div>
+      <div class="nav-label">MENU CATEGORY</div>
       <nav class="nav" id="categoryNav" aria-label="메뉴 카테고리"></nav>
       <div class="side-note">
         <strong>데이터 기준</strong><br>
