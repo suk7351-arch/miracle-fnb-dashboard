@@ -72,14 +72,14 @@
       position: sticky;
       top: 12px;
       height: calc(100vh - 24px);
-      padding: 24px 16px 20px;
+      padding: 24px 14px 20px;
       background:
         linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .74) 260px),
         linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
       color: var(--ink);
       display: flex;
       flex-direction: column;
-      gap: 24px;
+      gap: 18px;
       border-right: 1px solid var(--line);
       box-shadow: none;
     }
@@ -89,7 +89,7 @@
       grid-template-columns: 36px minmax(0, 1fr);
       gap: 4px 10px;
       align-items: center;
-      padding: 0 8px 18px;
+      padding: 0 8px 8px;
     }
 
     .brand::before {
@@ -118,86 +118,89 @@
       line-height: 1.35;
     }
 
+    .nav-label {
+      margin: 0 8px -8px;
+      color: #a0a69f;
+      font-size: 10px;
+      font-weight: 760;
+      letter-spacing: .08em;
+    }
+
     .nav {
       display: grid;
-      gap: 6px;
+      gap: 3px;
       overflow: auto;
-      padding-right: 5px;
+      padding: 0 4px 0 2px;
     }
 
     .nav button {
       width: 100%;
-      border: 1px solid transparent;
-      border-radius: 14px;
-      padding: 11px 11px 11px 34px;
+      border: 0;
+      border-radius: 12px;
+      padding: 10px 8px 10px 22px;
       text-align: left;
       background: transparent;
-      color: #6c756d;
+      color: #7a8279;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 12px;
-      font-size: 13.5px;
-      font-weight: 720;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 650;
       position: relative;
       box-shadow: none;
-      transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+      transition: background .18s ease, color .18s ease, transform .18s ease;
     }
 
     .nav button::before {
       content: "";
       position: absolute;
-      left: 14px;
+      left: 2px;
       top: 50%;
-      width: 7px;
-      height: 7px;
+      width: 3px;
+      height: 0;
       border-radius: 999px;
-      background: color-mix(in srgb, var(--cat) 58%, #d9dfd5);
+      background: var(--brand);
       transform: translateY(-50%);
-      opacity: .72;
+      opacity: 0;
+      transition: height .18s ease, opacity .18s ease;
     }
 
     .nav button:hover {
-      background: rgba(255, 255, 255, .72);
+      background: #f4f6f3;
       color: #18251e;
-      border-color: color-mix(in srgb, var(--cat) 18%, var(--line));
-      box-shadow: 0 8px 18px rgba(31, 43, 35, .045);
     }
 
     .nav button.active {
-      background:
-        linear-gradient(90deg, color-mix(in srgb, var(--cat-soft) 88%, #fff), #fff);
-      color: var(--cat-ink);
-      border-color: color-mix(in srgb, var(--cat) 26%, var(--line));
-      box-shadow: 0 10px 24px rgba(31, 43, 35, .07);
+      background: #f0f7f2;
+      color: #10231a;
+      font-weight: 760;
     }
 
     .nav button.active::before {
-      width: 9px;
-      height: 18px;
+      height: 22px;
       border-radius: 999px;
-      background: var(--cat);
       opacity: 1;
     }
 
     .nav small {
-      min-width: 25px;
-      height: 21px;
+      min-width: 22px;
+      height: 18px;
       border-radius: 999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #f0eee6;
-      color: #687267;
-      font-size: 11px;
-      font-weight: 760;
+      background: #eef1ec;
+      color: #7a8279;
+      font-size: 10px;
+      font-weight: 740;
       letter-spacing: 0;
     }
 
     .nav button.active small {
-      background: color-mix(in srgb, var(--cat) 18%, #fff);
-      color: var(--cat-ink);
+      background: var(--brand);
+      color: #ffffff;
     }
 
     .side-note {
@@ -224,24 +227,66 @@
     .topbar {
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 24px;
-      padding: 4px 4px 2px;
+      align-items: center;
+      gap: 16px;
+      padding: 0 2px 2px;
     }
 
-    .title h1 {
-      margin: 0;
-      font-size: clamp(28px, 2.3vw, 36px);
-      line-height: 1.2;
-      color: var(--brand-dark);
-      font-weight: 850;
+    .search-filter {
+      width: min(440px, 100%);
+      height: 46px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255, 255, 255, .92);
+      border: 1px solid #e7ece5;
+      border-radius: 14px;
+      padding: 0 12px 0 15px;
+      box-shadow: 0 10px 28px rgba(31, 43, 35, .045);
     }
 
-    .title p {
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: 15px;
-      line-height: 1.6;
+    .search-filter::before {
+      content: "";
+      width: 13px;
+      height: 13px;
+      border: 2px solid #8a948b;
+      border-radius: 999px;
+      box-shadow: 5px 5px 0 -4px #8a948b;
+      transform: rotate(45deg);
+      opacity: .8;
+      flex: 0 0 auto;
+    }
+
+    .search-filter input {
+      width: 100%;
+      min-width: 0;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: #16231b;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 620;
+    }
+
+    .search-filter input::placeholder {
+      color: #9ca49b;
+      font-weight: 560;
+    }
+
+    .search-filter kbd {
+      min-width: 34px;
+      height: 24px;
+      border: 1px solid #e2e7df;
+      border-radius: 8px;
+      background: #f7f8f5;
+      color: #8a948b;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      font-family: inherit;
     }
 
     .doc-meta {
@@ -390,6 +435,20 @@
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 14px;
       align-items: start;
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      min-height: 220px;
+      border: 1px dashed #dce4d9;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, .7);
+      color: #7a8279;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 650;
     }
 
     .card {
@@ -780,6 +839,9 @@
         text-align: left;
         white-space: nowrap;
       }
+      .nav-label {
+        display: none;
+      }
       .nav {
         display: grid;
         grid-auto-flow: column;
@@ -797,32 +859,36 @@
         width: auto;
         min-width: max-content;
         height: 38px;
-        padding: 0 10px 0 28px;
-        border-radius: 999px;
+        padding: 0 10px 0 18px;
+        border-radius: 12px;
         gap: 8px;
         white-space: nowrap;
       }
       .nav button::before {
-        left: 12px;
-        width: 5px;
-        height: 5px;
+        left: 7px;
+        width: 3px;
+        height: 0;
       }
       .nav button.active::before {
-        width: 7px;
-        height: 15px;
+        height: 17px;
       }
       .nav small {
-        min-width: 24px;
-        height: 22px;
+        min-width: 22px;
+        height: 18px;
         padding: 0 7px;
-        font-size: 11px;
+        font-size: 10px;
       }
       .side-note {
         display: none;
       }
       main { padding: 20px; }
       .topbar,
-      .section-head { display: grid; }
+      .section-head {
+        display: grid;
+      }
+      .search-filter {
+        width: 100%;
+      }
       .doc-meta { min-width: 0; }
       .card { grid-template-rows: 205px auto; }
       .cards,
@@ -838,6 +904,7 @@
         <strong>우후죽순 <br>레시피 보드</strong>
         <span>가맹점 운영용 메뉴 레시피 대시보드</span>
       </div>
+      <div class="nav-label">MENU</div>
       <nav class="nav" id="categoryNav" aria-label="메뉴 카테고리"></nav>
       <div class="side-note">
         <strong>데이터 기준</strong><br>
@@ -848,10 +915,10 @@
 
     <main>
       <header class="topbar">
-        <div class="title">
-          <h1>우후죽순 레시피</h1>
-          <p>카테고리 별 레시피를 확인할 수 있습니다.</p>
-        </div>
+        <label class="search-filter" aria-label="메뉴 검색">
+          <input id="menuSearch" type="search" placeholder="메뉴 검색" autocomplete="off">
+          <kbd>Ctrl F</kbd>
+        </label>
       </header>
 
       <section class="summary" aria-label="요약">
@@ -2948,18 +3015,24 @@
     `).join("");
 
     const categorySections = document.getElementById("categorySections");
+    const menuSearch = document.getElementById("menuSearch");
+    let activeCategoryName = categories[0].name;
+
     const renderCategory = (categoryName) => {
       const category = categories.find((item) => item.name === categoryName) || categories[0];
+      activeCategoryName = category.name;
+      const query = (menuSearch?.value || "").trim().toLowerCase();
+      const visibleMenus = category.menus.filter((menu) => menu.toLowerCase().includes(query));
       categorySections.innerHTML = `
       <section class="category-section" id="${slug(category.name)}" style="${categoryStyle(category.name)}">
         <div class="section-head">
           <div>
             <h2>${category.name}</h2>
-            <p>${category.menus.length}개 메뉴 · 선택한 카테고리만 표시 중</p>
+            <p>${visibleMenus.length}개 메뉴 · ${query ? "검색 결과 표시 중" : "선택한 카테고리만 표시 중"}</p>
           </div>
         </div>
         <div class="cards">
-          ${category.menus.map((menu) => {
+          ${visibleMenus.length ? visibleMenus.map((menu) => {
             const detail = recipeDetails[menu] || highballDetails[menu];
             return `
               <article class="card" style="${categoryStyle(category.name)}">
@@ -2975,13 +3048,20 @@
                 </div>
               </article>
             `;
-          }).join("")}
+          }).join("") : `<div class="empty-state">검색 결과가 없습니다.</div>`}
         </div>
       </section>
     `;
     };
 
     renderCategory(categories[0].name);
+    menuSearch?.addEventListener("input", () => renderCategory(activeCategoryName));
+    document.addEventListener("keydown", (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "f") {
+        event.preventDefault();
+        menuSearch?.focus();
+      }
+    });
 
     const drawer = document.getElementById("drawer");
     const backdrop = document.getElementById("backdrop");
