@@ -6,26 +6,26 @@
   <title>우후죽순 레시피</title>
   <style>
     :root {
-      --bg: #f7f5ef;
-      --surface: #fffefa;
-      --surface-soft: #faf8f1;
+      --bg: #eef0ed;
+      --surface: #ffffff;
+      --surface-soft: #f7f8f4;
       --ink: #17231d;
-      --muted: #70776e;
-      --line: #e5e1d7;
-      --line-strong: #d8d2c4;
-      --brand: #365a45;
-      --brand-dark: #14231c;
-      --sidebar: #fbfaf5;
-      --sidebar-2: #f3f0e7;
+      --muted: #7a837b;
+      --line: #e3e7df;
+      --line-strong: #d4dbd0;
+      --brand: #0c7a4d;
+      --brand-dark: #111d17;
+      --sidebar: #f9faf7;
+      --sidebar-2: #ffffff;
       --accent: #a97843;
       --soft: #edf3ec;
       --pending: #f6efe4;
       --warning: #ad4a3b;
       --radius: 18px;
       --radius-sm: 12px;
-      --shadow: 0 18px 42px rgba(41, 50, 40, .10);
-      --shadow-card: 0 10px 28px rgba(49, 60, 47, .075);
-      --shadow-hover: 0 18px 38px rgba(49, 60, 47, .14);
+      --shadow: 0 24px 70px rgba(29, 38, 32, .12);
+      --shadow-card: 0 8px 24px rgba(27, 38, 31, .055);
+      --shadow-hover: 0 18px 38px rgba(27, 38, 31, .12);
       --cat: #6f8f76;
       --cat-soft: #edf3ec;
       --cat-ink: #365a45;
@@ -41,7 +41,8 @@
     body {
       margin: 0;
       background:
-        linear-gradient(180deg, rgba(255, 254, 250, .78), rgba(247, 245, 239, 0) 340px),
+        radial-gradient(circle at 8% 4%, rgba(255, 255, 255, .95), rgba(255, 255, 255, 0) 310px),
+        radial-gradient(circle at 84% 12%, rgba(202, 215, 198, .36), rgba(202, 215, 198, 0) 360px),
         var(--bg);
       color: var(--ink);
       font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", Arial, sans-serif;
@@ -53,45 +54,68 @@
     button { font: inherit; color: inherit; }
 
     .shell {
-      min-height: 100vh;
+      min-height: calc(100vh - 56px);
       display: grid;
-      grid-template-columns: 270px minmax(0, 1fr);
+      grid-template-columns: 244px minmax(0, 1fr);
+      gap: 0;
+      max-width: 1500px;
+      margin: 28px auto;
+      width: calc(100% - 56px);
+      background: rgba(255, 255, 255, .62);
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
     .sidebar {
       position: sticky;
-      top: 0;
-      height: 100vh;
-      padding: 30px 18px 22px;
+      top: 28px;
+      height: calc(100vh - 56px);
+      padding: 24px 16px 20px;
       background:
-        linear-gradient(180deg, rgba(255, 255, 255, .90), rgba(255, 255, 255, .35) 240px),
+        linear-gradient(180deg, rgba(255, 255, 255, .96), rgba(255, 255, 255, .74) 260px),
         linear-gradient(180deg, var(--sidebar), var(--sidebar-2));
       color: var(--ink);
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 24px;
       border-right: 1px solid var(--line);
-      box-shadow: 12px 0 34px rgba(54, 66, 50, .055);
+      box-shadow: none;
     }
 
     .brand {
       display: grid;
-      gap: 10px;
-      padding: 0 10px 12px;
+      grid-template-columns: 36px minmax(0, 1fr);
+      gap: 4px 10px;
+      align-items: center;
+      padding: 0 8px 18px;
+    }
+
+    .brand::before {
+      content: "";
+      grid-row: 1 / 3;
+      width: 34px;
+      height: 34px;
+      border-radius: 13px;
+      background:
+        radial-gradient(circle at 50% 48%, #ffffff 0 28%, transparent 29%),
+        linear-gradient(135deg, #0c7a4d, #65aa79);
+      box-shadow: 0 10px 22px rgba(12, 122, 77, .20);
     }
 
     .brand strong {
-      font-size: 25px;
-      line-height: 1.15;
-      font-weight: 850;
+      font-size: 17px;
+      line-height: 1.18;
+      font-weight: 860;
       letter-spacing: 0;
       color: #14231c;
     }
 
     .brand span {
       color: #6e776d;
-      font-size: 13px;
-      line-height: 1.45;
+      font-size: 11.5px;
+      line-height: 1.35;
     }
 
     .nav {
@@ -104,35 +128,57 @@
     .nav button {
       width: 100%;
       border: 1px solid transparent;
-      border-radius: 13px;
-      padding: 11px 12px;
+      border-radius: 14px;
+      padding: 11px 11px 11px 34px;
       text-align: left;
-      background: rgba(255, 255, 255, .44);
-      color: #4d5a50;
+      background: transparent;
+      color: #6c756d;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      font-size: 14px;
+      font-size: 13.5px;
       font-weight: 720;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .64);
+      position: relative;
+      box-shadow: none;
       transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease, box-shadow .18s ease;
     }
 
+    .nav button::before {
+      content: "";
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--cat) 58%, #d9dfd5);
+      transform: translateY(-50%);
+      opacity: .72;
+    }
+
     .nav button:hover {
-      background: #fffefa;
+      background: rgba(255, 255, 255, .72);
       color: #18251e;
-      border-color: color-mix(in srgb, var(--cat) 20%, var(--line));
-      box-shadow: 0 8px 18px rgba(48, 58, 45, .06);
+      border-color: color-mix(in srgb, var(--cat) 18%, var(--line));
+      box-shadow: 0 8px 18px rgba(31, 43, 35, .045);
     }
 
     .nav button.active {
       background:
-        linear-gradient(90deg, color-mix(in srgb, var(--cat-soft) 86%, #fff), #fffefa);
+        linear-gradient(90deg, color-mix(in srgb, var(--cat-soft) 88%, #fff), #fff);
       color: var(--cat-ink);
-      border-color: color-mix(in srgb, var(--cat) 34%, var(--line));
-      box-shadow: inset 3px 0 0 var(--cat), 0 10px 22px rgba(62, 72, 57, .075);
+      border-color: color-mix(in srgb, var(--cat) 26%, var(--line));
+      box-shadow: 0 10px 24px rgba(31, 43, 35, .07);
+    }
+
+    .nav button.active::before {
+      width: 9px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--cat);
+      opacity: 1;
     }
 
     .nav small {
@@ -156,17 +202,23 @@
 
     .side-note {
       margin-top: auto;
-      border-top: 1px solid var(--line);
-      padding: 18px 10px 0;
-      color: #7a8078;
+      border: 1px solid #dce4d9;
+      border-radius: 18px;
+      padding: 16px;
+      color: #6d766e;
+      background:
+        radial-gradient(circle at 88% 10%, rgba(12, 122, 77, .12), transparent 72px),
+        #ffffff;
       font-size: 12.5px;
       line-height: 1.55;
+      box-shadow: 0 10px 24px rgba(31, 43, 35, .045);
     }
 
     main {
-      padding: 34px;
+      padding: 26px;
       display: grid;
-      gap: 24px;
+      gap: 20px;
+      min-width: 0;
     }
 
     .topbar {
@@ -174,7 +226,7 @@
       justify-content: space-between;
       align-items: flex-start;
       gap: 24px;
-      padding: 2px 0 4px;
+      padding: 4px 4px 2px;
     }
 
     .title h1 {
@@ -217,18 +269,18 @@
     .summary {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
+      gap: 12px;
     }
 
     .metric {
       border: 1px solid var(--line);
       background: var(--surface);
-      border-radius: var(--radius);
-      padding: 18px 18px 17px;
-      min-height: 98px;
+      border-radius: 17px;
+      padding: 17px 18px 16px;
+      min-height: 94px;
       position: relative;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(45, 55, 43, .055);
+      box-shadow: 0 8px 22px rgba(27, 38, 31, .045);
     }
 
     .metric::before {
@@ -244,6 +296,28 @@
     .metric:nth-child(2) { --cat: #7a8f5a; }
     .metric:nth-child(3) { --cat: #b7844f; }
     .metric:nth-child(4) { --cat: #6e8796; }
+
+    .metric:first-child {
+      background:
+        radial-gradient(circle at 82% 18%, rgba(255, 255, 255, .18), transparent 70px),
+        linear-gradient(135deg, #0b6f47, #0a8b56);
+      border-color: transparent;
+      box-shadow: 0 16px 34px rgba(12, 122, 77, .20);
+    }
+
+    .metric:first-child::before,
+    .metric:first-child::after {
+      display: none;
+    }
+
+    .metric:first-child span,
+    .metric:first-child strong {
+      color: #fff;
+    }
+
+    .metric:first-child span {
+      opacity: .86;
+    }
 
     .metric::after {
       content: "";
@@ -263,7 +337,7 @@
     .metric strong {
       display: block;
       margin-top: 10px;
-      font-size: 31px;
+      font-size: 32px;
       line-height: 1;
       color: var(--brand-dark);
       font-weight: 850;
@@ -314,25 +388,25 @@
     .cards {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
+      gap: 14px;
       align-items: start;
     }
 
     .card {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
+      border: 1px solid rgba(218, 225, 216, .82);
+      border-radius: 18px;
       background: var(--surface);
       min-height: 0;
       box-shadow: var(--shadow-card);
       overflow: hidden;
       display: grid;
-      grid-template-rows: 215px auto;
+      grid-template-rows: 208px auto;
       position: relative;
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
 
     .card:hover {
-      transform: translateY(-3px);
+      transform: translateY(-4px);
       border-color: color-mix(in srgb, var(--cat) 35%, var(--line));
       box-shadow: var(--shadow-hover);
     }
@@ -359,12 +433,12 @@
     }
 
     .card-body {
-      padding: 15px 15px 16px;
+      padding: 14px 15px 15px;
       display: grid;
       grid-template-rows: auto auto 40px;
       gap: 10px;
       min-height: 0;
-      background: linear-gradient(180deg, #fffefa, #fffdf8);
+      background: #fff;
       position: relative;
     }
 
@@ -441,9 +515,9 @@
       align-self: end;
       width: 100%;
       height: 40px;
-      border: 1px solid color-mix(in srgb, var(--cat) 28%, var(--line));
-      border-radius: 12px;
-      background: linear-gradient(180deg, #fffefa, color-mix(in srgb, var(--cat-soft) 62%, #fff));
+      border: 1px solid color-mix(in srgb, var(--cat) 22%, var(--line));
+      border-radius: 999px;
+      background: #fff;
       color: var(--cat-ink);
       font-weight: 820;
       cursor: pointer;
@@ -451,7 +525,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .72);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .72), 0 8px 16px rgba(28, 39, 31, .035);
       transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
     }
 
@@ -654,7 +728,15 @@
     }
 
     @media (max-width: 760px) {
-      .shell { display: block; }
+      .shell {
+        display: block;
+        width: 100%;
+        min-height: 100vh;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
       .sidebar {
         position: sticky;
         height: auto;
@@ -662,25 +744,41 @@
         z-index: 20;
         padding: 10px 12px 9px;
         gap: 9px;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
         box-shadow: 0 10px 24px rgba(61, 68, 55, .09);
       }
       .brand {
-        display: flex;
+        display: grid;
+        grid-template-columns: 34px minmax(0, 1fr);
+        grid-template-areas:
+          "mark title"
+          "mark desc";
         align-items: center;
-        justify-content: space-between;
-        gap: 12px;
+        column-gap: 10px;
+        row-gap: 1px;
         padding: 0 2px;
       }
+      .brand::before {
+        grid-area: mark;
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+      }
       .brand strong {
+        grid-area: title;
         font-size: 17px;
         line-height: 1.15;
+        white-space: nowrap;
       }
       .brand strong br { display: none; }
       .brand span {
-        max-width: 52%;
+        grid-area: desc;
+        max-width: none;
         font-size: 11px;
         line-height: 1.35;
-        text-align: right;
+        text-align: left;
+        white-space: nowrap;
       }
       .nav {
         display: grid;
@@ -699,10 +797,19 @@
         width: auto;
         min-width: max-content;
         height: 38px;
-        padding: 0 10px 0 12px;
+        padding: 0 10px 0 28px;
         border-radius: 999px;
         gap: 8px;
         white-space: nowrap;
+      }
+      .nav button::before {
+        left: 12px;
+        width: 5px;
+        height: 5px;
+      }
+      .nav button.active::before {
+        width: 7px;
+        height: 15px;
       }
       .nav small {
         min-width: 24px;
