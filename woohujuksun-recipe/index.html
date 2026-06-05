@@ -90,6 +90,7 @@
       display: grid;
       gap: 5px;
       align-items: center;
+      text-align: center;
       padding: 2px 8px 10px;
     }
 
@@ -108,11 +109,24 @@
       line-height: 1.35;
     }
 
+    .nav-group {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      flex-direction: column;
+      gap: 8px;
+      padding: 13px 8px 10px;
+      border: 1px solid rgba(218, 225, 216, .96);
+      border-radius: 18px;
+      background: transparent;
+    }
+
     .nav-label {
-      margin: 0 8px -8px;
+      margin: 0;
       color: #a0a69f;
       font-size: 10px;
       font-weight: 760;
+      text-align: center;
       letter-spacing: .08em;
     }
 
@@ -122,21 +136,21 @@
       flex: 1;
       align-content: start;
       overflow: auto;
-      padding: 0 4px 0 2px;
+      padding: 0 2px;
     }
 
     .nav button {
       width: 100%;
       border: 0;
       border-radius: 12px;
-      padding: 10px 8px 10px 22px;
-      text-align: left;
+      padding: 10px 34px;
+      text-align: center;
       background: transparent;
       color: #7a8279;
       cursor: pointer;
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       gap: 10px;
       font-size: 13px;
       font-weight: 650;
@@ -175,6 +189,8 @@
     }
 
     .nav small {
+      position: absolute;
+      right: 9px;
       min-width: 22px;
       height: 18px;
       border-radius: 999px;
@@ -867,8 +883,17 @@
         max-width: none;
         font-size: 11px;
         line-height: 1.35;
-        text-align: left;
+        text-align: center;
         white-space: nowrap;
+      }
+      .nav-group {
+        display: block;
+        flex: none;
+        min-height: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
       }
       .nav-label {
         display: none;
@@ -908,6 +933,8 @@
         height: 17px;
       }
       .nav small {
+        position: static;
+        right: auto;
         min-width: 22px;
         height: 18px;
         padding: 0 7px;
@@ -958,8 +985,10 @@
         <strong>우후죽순 레시피</strong>
         <span>가맹점 운영용 레시피 대시보드</span>
       </div>
-      <div class="nav-label">MENU CATEGORY</div>
-      <nav class="nav" id="categoryNav" aria-label="메뉴 카테고리"></nav>
+      <div class="nav-group">
+        <div class="nav-label">MENU CATEGORY</div>
+        <nav class="nav" id="categoryNav" aria-label="메뉴 카테고리"></nav>
+      </div>
       <div class="side-note">
         <strong>데이터 기준</strong><br>
         우후죽순 메뉴구성 대시보드 적용용 26.06.xlsx<br>
