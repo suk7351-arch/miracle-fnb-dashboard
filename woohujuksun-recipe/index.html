@@ -3103,29 +3103,32 @@
       const category = categories.find((item) => item.name === categoryName) || categories[0];
       activeCategoryName = category.name;
       const query = (menuSearch?.value || "").trim().toLowerCase();
-      const visibleMenus = category.menus.filter((menu) => menu.toLowerCase().includes(query));
+      const visibleMenus = query
+        ? categories.flatMap((item) => item.menus.filter((menu) => menu.toLowerCase().includes(query)))
+        : category.menus;
       categorySections.innerHTML = `
       <section class="category-section" id="${slug(category.name)}" style="${categoryStyle(category.name)}">
         <div class="section-head">
           <div>
-            <h2>${category.name}</h2>
+            <h2>${query ? "검색 결과" : category.name}</h2>
             <p>${visibleMenus.length}개 메뉴 · ${query ? "검색 결과 표시 중" : "선택한 카테고리만 표시 중"}</p>
           </div>
         </div>
         <div class="cards">
           ${visibleMenus.length ? visibleMenus.map((menu) => {
+            const menuCategory = categories.find((item) => item.menus.includes(menu)) || category;
             const detail = recipeDetails[menu] || highballDetails[menu];
             return `
-              <article class="card" style="${categoryStyle(category.name)}">
+              <article class="card" style="${categoryStyle(menuCategory.name)}">
                 <div class="photo">${renderPhoto(menu)}</div>
                 <div class="card-body">
                   <h3>${menu}</h3>
                   <div class="badge-row">
-                    <span class="badge category-badge">${category.name}</span>
+                    <span class="badge category-badge">${menuCategory.name}</span>
                     <span class="badge status-badge ${detail ? "" : "pending"}">${detail ? "레시피 등록" : "등록 예정"}</span>
                     ${menuVideos[menu] ? `<span class="badge video-badge">영상 있음</span>` : ""}
                   </div>
-                  <button class="open-detail" data-menu="${menu}" data-category="${category.name}">레시피 보기</button>
+                  <button class="open-detail" data-menu="${menu}" data-category="${menuCategory.name}">레시피 보기</button>
                 </div>
               </article>
             `;
