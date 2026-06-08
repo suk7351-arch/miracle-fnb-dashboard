@@ -734,11 +734,14 @@
       box-shadow: 0 16px 36px rgba(31, 43, 35, .10);
     }
 
-    .recipe-video video {
+    .recipe-video video,
+    .recipe-video iframe {
       width: 100%;
+      aspect-ratio: 16 / 9;
       max-height: 360px;
       display: block;
       background: #0f1f17;
+      border: 0;
     }
 
     .detail-grid {
@@ -3054,7 +3057,20 @@
       "아이스크림(기본)": "assets/basic/기본_아이스크림.jpg"
     };
     const menuVideos = {
-      "일본식오뎅탕": "assets/videos/일본식오뎅탕.mp4"
+      "묵은지김치우동전골": "https://youtu.be/4Jjtn21wuNM",
+      "일본식오뎅탕": "https://youtu.be/0BWMPc4Bf7o",
+      "소고기육전": "https://youtu.be/ZykyWhvj3p0",
+      "직화쭈꾸미볶음": "https://youtu.be/It2PLwMtM2I",
+      "관자버터구이": "https://youtu.be/-gPbiVt_yy8",
+      "육회칼빔면": "https://youtu.be/XJdrWmgwgxI",
+      "부대찌개": "https://youtu.be/LQMyyORLVp8",
+      "얼큰술국": "https://youtu.be/IxrbldvxVxU",
+      "해물알탕": "https://youtu.be/hnf5G4Cq_Lw",
+      "해물짬뽕탕": "https://youtu.be/WhLpCWwI7so",
+      "옛날쫀득감자전": "https://youtu.be/eFQPtM7WsNw",
+      "페퍼로니치즈감자채전": "https://youtu.be/9lP83VxD4r0",
+      "순살양념치킨": "https://youtu.be/kJV4slhYFPQ",
+      "옛날떡꼬치튀김": "https://youtu.be/P3N_h9xGRzA"
     };
     const renderPhoto = (menu, size = "card") => {
       const image = menuImages[menu];
@@ -3064,11 +3080,15 @@
     const renderVideo = (menu) => {
       const video = menuVideos[menu];
       if (!video) return "";
+      const youtubeMatch = video.match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?v=|embed\/))([^?&/]+)/);
+      const videoMarkup = youtubeMatch
+        ? `<iframe src="https://www.youtube.com/embed/${youtubeMatch[1]}" title="${menu} 레시피 영상" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>`
+        : `<video controls preload="metadata" src="${video}"></video>`;
       return `
         <section class="panel">
           <h3>레시피 영상</h3>
           <div class="recipe-video">
-            <video controls preload="metadata" src="${video}"></video>
+            ${videoMarkup}
           </div>
         </section>
       `;
