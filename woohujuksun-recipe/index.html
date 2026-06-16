@@ -236,6 +236,9 @@
       position: sticky;
       top: 12px;
       z-index: 18;
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -246,6 +249,7 @@
       border-radius: 22px;
       box-shadow: 0 18px 42px rgba(27, 38, 31, .10);
       backdrop-filter: blur(16px);
+      overflow: visible;
     }
 
     .top-logo {
@@ -296,21 +300,6 @@
     .search-filter input::placeholder {
       color: #9ca49b;
       font-weight: 560;
-    }
-
-    .search-filter kbd {
-      min-width: 34px;
-      height: 24px;
-      border: 1px solid #e2e7df;
-      border-radius: 8px;
-      background: #f7f8f5;
-      color: #8a948b;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      font-family: inherit;
     }
 
     .doc-meta {
@@ -943,31 +932,38 @@
         display: none;
       }
       main {
-        padding: 20px;
+        padding: 14px 12px 20px;
         min-height: auto;
         border: 0;
         border-radius: 0;
         box-shadow: none;
         background: transparent;
+        overflow: visible;
       }
       .topbar,
       .section-head {
         display: grid;
       }
       .topbar {
-        top: 92px;
+        top: 108px;
         grid-template-columns: minmax(0, 1fr) auto;
         align-items: center;
         gap: 10px;
         padding: 10px 12px;
         border-radius: 18px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        overflow: visible;
       }
       .search-filter {
         width: 100%;
+        min-width: 0;
       }
       .top-logo {
         width: 74px;
         height: 46px;
+        justify-self: end;
       }
       .doc-meta { min-width: 0; }
       .card { grid-template-rows: 205px auto; }
@@ -997,7 +993,6 @@
       <header class="topbar">
         <label class="search-filter" aria-label="메뉴 검색">
           <input id="menuSearch" type="search" placeholder="메뉴 검색" autocomplete="off">
-          <kbd>Ctrl F</kbd>
         </label>
         <img class="top-logo" src="assets/brand/woohujuksun-logo.png" alt="우후죽순 로고">
       </header>
