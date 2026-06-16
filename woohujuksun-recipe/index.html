@@ -3366,7 +3366,7 @@
       const detail = recipeDetails[menu];
       const highball = highballDetails[menu];
       drawerTitle.textContent = menu;
-      drawerSub.textContent = highball ? `${category} · 하이볼 레시피` : detail ? `${category} · ${detail.time}` : `${category} · 레시피 등록 예정`;
+      drawerSub.textContent = category;
 
       if (!detail && !highball) {
         drawerBody.innerHTML = `
