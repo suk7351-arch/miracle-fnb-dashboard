@@ -971,9 +971,124 @@
       .summary,
       .detail-grid { grid-template-columns: 1fr; }
     }
+    body.auth-locked {
+      overflow: hidden;
+    }
+
+    body.auth-locked .shell,
+    body.auth-locked .drawer,
+    body.auth-locked .drawer-backdrop {
+      display: none !important;
+    }
+
+    .auth-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background:
+        radial-gradient(circle at top left, rgba(27, 75, 50, 0.12), transparent 34%),
+        linear-gradient(135deg, #f6f8f2 0%, #ffffff 54%, #edf4ec 100%);
+    }
+
+    .auth-card {
+      width: min(420px, 100%);
+      padding: 34px 32px 30px;
+      border: 1px solid rgba(27, 75, 50, 0.14);
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 22px 60px rgba(32, 48, 39, 0.14);
+      backdrop-filter: blur(14px);
+    }
+
+    .auth-title {
+      margin: 0 0 6px;
+      color: var(--green-900, #183d2b);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .auth-desc {
+      margin: 0 0 24px;
+      color: var(--muted, #6d766f);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .auth-field-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink, #18251d);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .auth-input {
+      width: 100%;
+      height: 48px;
+      box-sizing: border-box;
+      padding: 0 14px;
+      border: 1px solid rgba(27, 75, 50, 0.18);
+      border-radius: 15px;
+      background: #fbfcf8;
+      color: var(--ink, #18251d);
+      font-size: 16px;
+      outline: none;
+      transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .auth-input:focus {
+      border-color: var(--green-700, #1f6f4b);
+      background: #ffffff;
+      box-shadow: 0 0 0 4px rgba(31, 111, 75, 0.12);
+    }
+
+    .auth-submit {
+      width: 100%;
+      height: 48px;
+      margin-top: 14px;
+      border: 0;
+      border-radius: 15px;
+      background: var(--green-700, #1f6f4b);
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .auth-submit:hover {
+      background: var(--green-800, #195a3d);
+      box-shadow: 0 12px 28px rgba(31, 111, 75, 0.18);
+      transform: translateY(-1px);
+    }
+
+    .auth-error {
+      margin: 12px 0 0;
+      color: #b23b31;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .auth-gate[hidden] {
+      display: none !important;
+    }
   </style>
 </head>
-<body>
+<body class="auth-locked">
+  <div class="auth-gate" id="authGate" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <form class="auth-card" id="authForm">
+      <h1 class="auth-title" id="authTitle">우후죽순 레시피</h1>
+      <p class="auth-desc">온라인 대시보드 접속을 위해 비밀번호를 입력해주세요.</p>
+      <label class="auth-field-label" for="authPassword">비밀번호</label>
+      <input class="auth-input" id="authPassword" type="password" inputmode="numeric" autocomplete="current-password" placeholder="비밀번호 입력">
+      <button class="auth-submit" type="submit">입장하기</button>
+      <p class="auth-error" id="authError" hidden>비밀번호가 올바르지 않습니다.</p>
+    </form>
+  </div>
   <div class="shell">
     <aside class="sidebar">
       <div class="brand">
@@ -1021,6 +1136,44 @@
   </aside>
 
   <script>
+    const AUTH_PASSWORD = "12345";
+    const AUTH_STORAGE_KEY = "woohujuksunRecipeAuth";
+
+    function initAuthGate() {
+      const gate = document.getElementById("authGate");
+      const form = document.getElementById("authForm");
+      const input = document.getElementById("authPassword");
+      const error = document.getElementById("authError");
+
+      const unlock = () => {
+        document.body.classList.remove("auth-locked");
+        if (gate) gate.hidden = true;
+      };
+
+      if (sessionStorage.getItem(AUTH_STORAGE_KEY) === "ok") {
+        unlock();
+        return;
+      }
+
+      if (!form || !input) return;
+
+      window.setTimeout(() => input.focus(), 80);
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (input.value === AUTH_PASSWORD) {
+          sessionStorage.setItem(AUTH_STORAGE_KEY, "ok");
+          unlock();
+          return;
+        }
+        if (error) error.hidden = false;
+        input.value = "";
+        input.focus();
+      });
+    }
+
+    initAuthGate();
+
     const categories = [
       {
             "name": "탕/찜",
